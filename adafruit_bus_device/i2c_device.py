@@ -54,7 +54,7 @@ class I2CDevice:
                 device.write(bytes_read)
     """
 
-    def __init__(self, i2c: I2C, device_address: int, probe: bool = True) -> None:
+    def __init__(self, i2c, device_address: int, probe: bool = True) -> None:
         self.i2c = i2c
         self.device_address = device_address
 
@@ -62,7 +62,7 @@ class I2CDevice:
             self.__probe_for_device()
 
     def readinto(
-        self, buf: WriteableBuffer, *, start: int = 0, end: Optional[int] = None
+        self, buf, *, start: int = 0, end: Optional[int] = None
     ) -> None:
         """
         Read into ``buf`` from the device. The number of bytes read will be the
@@ -81,7 +81,7 @@ class I2CDevice:
         self.i2c.readfrom_into(self.device_address, buf, start=start, end=end)
 
     def write(
-        self, buf: ReadableBuffer, *, start: int = 0, end: Optional[int] = None
+        self, buf, *, start: int = 0, end: Optional[int] = None
     ) -> None:
         """
         Write the bytes from ``buffer`` to the device, then transmit a stop
@@ -102,8 +102,8 @@ class I2CDevice:
     # pylint: disable-msg=too-many-arguments
     def write_then_readinto(
         self,
-        out_buffer: ReadableBuffer,
-        in_buffer: WriteableBuffer,
+        out_buffer,
+        in_buffer,
         *,
         out_start: int = 0,
         out_end: Optional[int] = None,
